@@ -1,0 +1,39 @@
+{
+  "name": "react-native-activestorage",
+  "version": "0.1.0",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist/commonjs",
+    "dist/esm"
+  ],
+  "description": "React Native support for Rails ActiveStorage",
+  "homepage": "https://github.com/jpalumickas/react-native-activestorage",
+  "bugs": {
+    "url": "https://github.com/jpalumickas/react-native-activestorage"
+  },
+  "repository": "jpalumickas/react-native-activestorage",
+  "license": "MIT",
+  "dependencies": {
+    "abab": "^2.0.0"
+  },
+  "peerDependencies": {
+    "rn-fetch-blob": "^0.10.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.5"
+  },
+  "scripts": {
+    "build": "yarn build-esm && yarn build-commonjs",
+    "watch": "BABEL_ENV=commonjs babel src --out-dir dist/commonjs --config-file ./babel.config.js -w",
+    "build-commonjs": "NODE_ENV=production BABEL_ENV=commonjs babel src --out-dir dist/commonjs --config-file ./babel.config.js  --copy-files",
+    "build-esm": "NODE_ENV=production BABEL_ENV=esm babel src --out-dir dist/esm --config-file ./babel.config.js  --copy-files"
+  }
+}
