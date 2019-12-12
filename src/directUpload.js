@@ -30,9 +30,9 @@ export default ({ directUploadsUrl, file }, onStatusChange) => {
     task = RNFetchBlob.fetch('PUT', url, headers, fileData)
 
     task
-      .uploadProgress({ interval: 250 }, (loaded, total) => {
-        const progress = (loaded / total) * 100
-        handleStatusUpdate({ status: 'progress', progress });
+      .uploadProgress({ interval: 250 }, (count, total) => {
+        const progress = (count / total) * 100
+        handleStatusUpdate({ status: 'progress', progress, total, count });
       })
       .then((resp) => {
         const status = resp.info().status;
