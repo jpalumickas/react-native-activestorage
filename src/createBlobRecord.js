@@ -10,6 +10,10 @@ export default async ({ directUploadsUrl = '/rails/active_storage/direct_uploads
     checksum,
   }
 
+  if (file.metadata) {
+    params.metadata = file.metadata;
+  }
+
   const response = await fetch(directUploadsUrl, {
     method: 'POST',
     body: JSON.stringify({ blob: params }),
