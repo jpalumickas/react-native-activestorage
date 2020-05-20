@@ -51,3 +51,9 @@ const Upload = () => (
   </DirectUpload>
 )
 ```
+
+## License
+
+The package is available as open source under the terms of the [MIT License][license].
+
+[license]: https://raw.githubusercontent.com/jpalumickas/react-native-activestorage/master/LICENSE
