@@ -4,7 +4,7 @@ Use direct upload for uploading files to Rails ActiveStorage.
 
 ## Installation
 
-Install package and `rn-fetch-blob`
+Install this package and [rn-fetch-blob](rn-fetch-blob)
 
 ```sh
 yarn add react-native-activestorage rn-fetch-blob
@@ -57,3 +57,4 @@ const Upload = () => (
 The package is available as open source under the terms of the [MIT License][license].
 
 [license]: https://raw.githubusercontent.com/jpalumickas/react-native-activestorage/master/LICENSE
+[rn-fetch-blob]: https://github.com/joltup/rn-fetch-blob

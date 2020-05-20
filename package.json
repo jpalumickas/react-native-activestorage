@@ -18,7 +18,7 @@
     "abab": "^2.0.3"
   },
   "peerDependencies": {
-    "rn-fetch-blob": "^0.10.0"
+    "rn-fetch-blob": ">= 0.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
