@@ -3,7 +3,7 @@ import createBlobRecord from './createBlobRecord';
 
 let id = 0
 
-export default ({ directUploadsUrl, file }, onStatusChange) => {
+export default ({ directUploadsUrl, file, headers }, onStatusChange) => {
   const taskId = ++id;
   let canceled = false;
   let task;
@@ -22,12 +22,12 @@ export default ({ directUploadsUrl, file }, onStatusChange) => {
   handleStatusUpdate({ status: 'waiting' });
 
   return new Promise(async (resolve, reject) => {
-    const blobData = await createBlobRecord({ directUploadsUrl, file });
-    const { url, headers } = blobData.direct_upload;
+    const blobData = await createBlobRecord({ directUploadsUrl, file, headers });
+    const { url, headers: uploadHeaders } = blobData.direct_upload;
 
     const fileData = RNFetchBlob.wrap(file.path);
 
-    task = RNFetchBlob.fetch('PUT', url, headers, fileData)
+    task = RNFetchBlob.fetch('PUT', url, uploadHeaders, fileData)
 
     task
       .uploadProgress({ interval: 250 }, (count, total) => {

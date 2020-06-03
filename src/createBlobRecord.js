@@ -1,6 +1,6 @@
 import getChecksum from './checksum';
 
-export default async ({ directUploadsUrl = '/rails/active_storage/direct_uploads', file }) => {
+export default async ({ directUploadsUrl = '/rails/active_storage/direct_uploads', file, headers = {} }) => {
   const checksum = await getChecksum({ path: file.path });
 
   const params = {
@@ -17,7 +17,7 @@ export default async ({ directUploadsUrl = '/rails/active_storage/direct_uploads
   const response = await fetch(directUploadsUrl, {
     method: 'POST',
     body: JSON.stringify({ blob: params }),
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...headers },
   });
 
   return response.json();
