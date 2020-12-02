@@ -3,7 +3,7 @@ import createBlobRecord from './createBlobRecord';
 
 let id = 0
 
-export default ({ directUploadsUrl, file, headers }, onStatusChange) => {
+export default ({ directUploadsUrl, file, headers, callbackFun }, onStatusChange) => {
   const taskId = ++id;
   let canceled = false;
   let task;
@@ -23,6 +23,7 @@ export default ({ directUploadsUrl, file, headers }, onStatusChange) => {
 
   return new Promise(async (resolve, reject) => {
     const blobData = await createBlobRecord({ directUploadsUrl, file, headers });
+    callbackFun&&callbackFun(blobData)
     const { url, headers: uploadHeaders } = blobData.direct_upload;
 
     const fileData = RNFetchBlob.wrap(file.path);
