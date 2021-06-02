@@ -1,6 +1,6 @@
 import getChecksum from './checksum';
 
-export default async ({ directUploadsUrl = '/rails/active_storage/direct_uploads', file, headers = {} }) => {
+const createBlobRecord = async ({ directUploadsUrl, file, headers = {} }) => {
   const checksum = await getChecksum({ path: file.path });
 
   const params = {
@@ -22,3 +22,5 @@ export default async ({ directUploadsUrl = '/rails/active_storage/direct_uploads
 
   return response.json();
 }
+
+export default createBlobRecord;

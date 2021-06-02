@@ -1,3 +1,4 @@
-export { default as checksum } from './checksum';
-export { default as directUpload } from './directUpload';
-export { default } from './DirectUploadProvider';
+export { default as checksum } from './lib/checksum';
+export { default as directUpload } from './lib/directUpload';
+export { default as DirectUpload } from './DirectUpload';
+export { default as useDirectUpload } from './useDirectUpload';
