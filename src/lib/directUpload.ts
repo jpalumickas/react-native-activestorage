@@ -1,12 +1,19 @@
-import RNFetchBlob from 'rn-fetch-blob';
+import RNFetchBlob, { FetchBlobResponse, StatefulPromise } from 'rn-fetch-blob';
 import createBlobRecord from './createBlobRecord';
+import { File, DirectUploadTaskResponse, HandleStatusUpdateData } from '../types';
 
 let id = 0;
 
-const directUpload = ({ directUploadsUrl, file, headers }, onStatusChange) => {
+interface DirectUploadParams {
+  directUploadsUrl: string;
+  file: File;
+  headers?: object;
+}
+
+const directUpload = ({ directUploadsUrl, file, headers }: DirectUploadParams, onStatusChange: (data: DirectUploadTaskResponse) => void) => {
   const taskId = ++id;
   let canceled = false;
-  let task;
+  let task: StatefulPromise<FetchBlobResponse>;
 
   const handleCancel = () => {
     if (!task) {
@@ -17,13 +24,13 @@ const directUpload = ({ directUploadsUrl, file, headers }, onStatusChange) => {
     task.cancel();
   };
 
-  const handleStatusUpdate = (data) => {
+  const handleStatusUpdate = (data: HandleStatusUpdateData) => {
     onStatusChange({ ...data, id: taskId, cancel: handleCancel, file });
   };
 
   handleStatusUpdate({ status: 'waiting' });
 
-  return new Promise(async (resolve, reject) => {
+  return new Promise<void>(async (resolve) => {
     try {
       const blobData = await createBlobRecord({
         directUploadsUrl,
@@ -47,7 +54,7 @@ const directUpload = ({ directUploadsUrl, file, headers }, onStatusChange) => {
           if (status >= 200 && status < 400) {
             handleStatusUpdate({ status: 'success' });
           } else {
-            handleStatusUpdate({ status: 'error', error: null });
+            handleStatusUpdate({ status: 'error', error: new Error('Response not success') });
           }
 
           resolve(blobData.signed_id);

@@ -1,9 +1,28 @@
 import getChecksum from './checksum';
+import { File } from '../types';
 
-const createBlobRecord = async ({ directUploadsUrl, file, headers = {} }) => {
+interface CreateBlobRecordParams {
+  directUploadsUrl: string;
+  file: File;
+  headers?: object;
+}
+
+interface BlobParams {
+  filename: string;
+  content_type: string;
+  byte_size: number;
+  checksum: string;
+  metadata?: object;
+}
+
+const createBlobRecord = async ({ directUploadsUrl, file, headers = {} }: CreateBlobRecordParams) => {
   const checksum = await getChecksum({ path: file.path });
 
-  const params = {
+  if (!checksum) {
+    throw new Error(`Failed to get file checksum:  ${file.path}`)
+  }
+
+  const params: BlobParams = {
     filename: file.name,
     content_type: file.type || 'image/jpeg',
     byte_size: file.size,
