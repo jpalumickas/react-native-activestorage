@@ -3,7 +3,7 @@ import directUpload from './lib/directUpload';
 import insertOrReplace from './lib/insertOrReplace';
 import useConfig from './useConfig';
 
-const useDirectUpload = ({ onSuccess }) => {
+const useDirectUpload = ({ onSuccess } = {}) => {
   const { directUploadsUrl } = useConfig();
   const [uploads, setUploads] = useState([]);
 
@@ -21,7 +21,7 @@ const useDirectUpload = ({ onSuccess }) => {
 
       const validIds = signedIds.filter((it) => it);
       if (validIds.length > 0) {
-        onSuccess({ signedIds: validIds });
+        onSuccess && onSuccess({ signedIds: validIds });
       }
 
       return { signedIds: validIds }

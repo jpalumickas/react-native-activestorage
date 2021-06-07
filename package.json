@@ -4,7 +4,7 @@
   "source": "src/index.js",
   "main": "dist/react-native-activestorage.js",
   "module": "dist/react-native-activestorage.module.js",
-  "types": "dist/react-native-activestorage.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
