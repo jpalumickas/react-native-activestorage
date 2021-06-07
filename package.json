@@ -1,6 +1,6 @@
 {
   "name": "react-native-activestorage",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0",
   "source": "src/index.ts",
   "main": "dist/react-native-activestorage.js",
   "module": "dist/react-native-activestorage.module.js",
