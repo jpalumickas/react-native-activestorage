@@ -23,6 +23,8 @@ const useDirectUpload = ({ onSuccess }) => {
       if (validIds.length > 0) {
         onSuccess({ signedIds: validIds });
       }
+
+      return { signedIds: validIds }
     },
     [handleFileUploadChange, onSuccess]
   );
