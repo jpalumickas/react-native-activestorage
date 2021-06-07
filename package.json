@@ -2,8 +2,9 @@
   "name": "react-native-activestorage",
   "version": "1.0.0-beta.1",
   "source": "src/index.js",
-  "main": "./dist/react-native-activestorage.js",
-  "module": "./dist/react-native-activestorage.module.js",
+  "main": "dist/react-native-activestorage.js",
+  "module": "dist/react-native-activestorage.module.js",
+  "types": "dist/react-native-activestorage.d.ts",
   "files": [
     "dist",
     "src"
@@ -22,9 +23,11 @@
     "rn-fetch-blob": ">= 0.10.0"
   },
   "devDependencies": {
+    "@types/react": "^17.0.9",
     "microbundle": "^0.13.1",
     "prettier": "^2.3.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "rn-fetch-blob": "^0.12.0"
   },
   "scripts": {
     "build": "rimraf dist && microbundle -f modern,esm,cjs --jsx React.createElement",
