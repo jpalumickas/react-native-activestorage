@@ -23,7 +23,7 @@ export interface DirectUploadTask {
 
 export interface DirectUploadTaskError extends DirectUploadTask {
   status: 'error';
-  error?: Error;
+  error: Error;
 }
 
 export interface DirectUploadTaskSuccess extends DirectUploadTask {
@@ -41,8 +41,8 @@ export interface DirectUploadTaskCanceled extends DirectUploadTask {
 export interface DirectUploadTaskUploading extends DirectUploadTask {
   status: 'uploading';
   progress: number;
-  total: number;
-  count: number;
+  totalBytes: number;
+  uploadedBytes: number;
 }
 
 export type DirectUploadTaskResponse =

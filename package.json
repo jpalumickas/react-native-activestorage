@@ -20,15 +20,15 @@
     "abab": "^2.0.5"
   },
   "peerDependencies": {
-    "rn-fetch-blob": ">= 0.10.0",
     "react": ">=16.8",
-    "react-native": ">= 0.60.0"
+    "react-native": ">= 0.60.0",
+    "rn-fetch-blob": ">= 0.10.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.9",
     "@types/react-native": "^0.64.10",
     "microbundle": "^0.13.1",
-    "prettier": "^2.3.0",
+    "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
     "rn-fetch-blob": "^0.12.0"
   },

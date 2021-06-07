@@ -36,14 +36,23 @@ const Upload = () => {
     // Do something;
   }
 
-  const { upload, uploading , uploads } = useDirectUpload({ onSuccess });
+  const { upload, uploading, uploads } = useDirectUpload({ onSuccess });
+
+  const onUploadButtonClick = async () => {
+    const files = await showPicker();
+    const { signedIds } = await upload(files);
+    // Assign signed IDs
+  }
 
   return (
     <View>
-      <View onClick={() => showPicker((files) => upload(files))}>
+      <View onClick={onUploadButtonClick}>
         <Text>Upload</Text>
       </View>
-      {uploads.map(upload => <UploadItem upload={upload} key={upload.id} />)}
+
+      {uploads.map(upload => (
+        <UploadItem upload={upload} key={upload.id} />
+      ))}
     </View>
   )
 }
@@ -83,8 +92,8 @@ const file = {
 const directUploadsUrl = 'https://localhost:3000/rails/active_storage/direct_uploads';
 
 directUpload({ file, directUploadsUrl }, ({ status, progress, cancel }) => {
-  // status - waiting/progress/finished/error
-  // progress - 0-100%
+  // status - waiting/uploading/success/error/canceled
+  // progress - 0-100% (for uploading status)
   // cancel - function to stop uploading a file
 });
 ```

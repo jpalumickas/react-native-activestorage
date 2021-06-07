@@ -45,9 +45,9 @@ const directUpload = ({ directUploadsUrl, file, headers }: DirectUploadParams, o
       task = RNFetchBlob.fetch('PUT', url, uploadHeaders, fileData);
 
       task
-        .uploadProgress({ interval: 250 }, (count, total) => {
-          const progress = (count / total) * 100;
-          handleStatusUpdate({ status: 'uploading', progress, total, count });
+        .uploadProgress({ interval: 250 }, (uploadedBytes, totalBytes) => {
+          const progress = (uploadedBytes / totalBytes) * 100;
+          handleStatusUpdate({ status: 'uploading', progress, totalBytes, uploadedBytes });
         })
         .then((resp) => {
           const status = resp.info().status;
