@@ -8,7 +8,7 @@ interface OnSuccessParams {
   signedIds: string[];
 }
 
-interface Params {
+export type Params = {
   onSuccess?: (params: OnSuccessParams) => void;
 }
 
