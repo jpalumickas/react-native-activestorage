@@ -20,7 +20,9 @@
     "abab": "^2.0.5"
   },
   "peerDependencies": {
-    "rn-fetch-blob": ">= 0.10.0"
+    "rn-fetch-blob": ">= 0.10.0",
+    "react": ">=16.8",
+    "react-native": ">= 0.60.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.9",

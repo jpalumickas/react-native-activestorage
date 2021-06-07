@@ -12,6 +12,64 @@ yarn add react-native-activestorage rn-fetch-blob
 
 ## Usage
 
+### Add Active Storage provider
+
+```jsx
+import { ActiveStorageProvider } from 'react-native-activestorage'
+
+const App = () => (
+  <ActiveStorageProvider host="https://localhost:4000">
+    <Navigation />
+  </ActiveStorageProvider>
+)
+```
+
+You can provide `mountPath` to provider if you have different than `/rails/active_storage`
+
+### Use with React Hooks
+
+```jsx
+import { useDirectUpload } from 'react-native-activestorage'
+
+const Upload = () => {
+  const onSuccess = ({ signedIds }) => {
+    // Do something;
+  }
+
+  const { upload, uploading , uploads } = useDirectUpload({ onSuccess });
+
+  return (
+    <View>
+      <View onClick={() => showPicker((files) => upload(files))}>
+        <Text>Upload</Text>
+      </View>
+      {uploads.map(upload => <UploadItem upload={upload} key={upload.id} />)}
+    </View>
+  )
+}
+```
+
+### Use with React Component
+
+```jsx
+import { DirectUpload } from 'react-native-activestorage'
+
+const Upload = () => (
+  <DirectUpload onSuccess={({ signedIds }) => console.warn({ signedIds })}>
+    {({ upload, uploading, uploads }) => (
+      <View>
+        <View onClick={() => showPicker((files) => upload(files))}>
+          <Text>Upload</Text>
+        </View>
+        {uploads.map(upload => <UploadItem upload={upload} key={upload.id} />)}
+      </View>
+    )}
+  </DirectUpload>
+)
+```
+
+### Use `directUpload` without React
+
 ```js
 import { directUpload } from 'react-native-activestorage'
 
@@ -29,27 +87,6 @@ directUpload({ file, directUploadsUrl }, ({ status, progress, cancel }) => {
   // progress - 0-100%
   // cancel - function to stop uploading a file
 });
-```
-
-Use with React Component
-
-```jsx
-import DirectUpload from 'react-native-activestorage'
-
-const directUploadsUrl = 'https://localhost:3000/rails/active_storage/direct_uploads';
-
-const Upload = () => (
-  <DirectUpload directUploadsUrl={directUploadUrl} onSuccess={({ signedIds }) => console.warn({ signedIds })}>
-    {({ handleUpload, uploading, uploads }) => (
-      <View>
-        <View onClick={() => showPicker(handleUpload)}>
-          <Text>Upload</Text>
-        </View>
-        {uploads.map(upload => <UploadItem upload={upload} key={upload.id} />)}
-      </View>
-    )}
-  </DirectUpload>
-)
 ```
 
 ## License
