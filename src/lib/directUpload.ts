@@ -1,6 +1,6 @@
 import RNFetchBlob, { FetchBlobResponse, StatefulPromise } from 'rn-fetch-blob';
 import createBlobRecord from './createBlobRecord';
-import { File, DirectUploadTaskResponse, HandleStatusUpdateData } from '../types';
+import { File, DirectUploadResult, HandleStatusUpdateData } from '../types';
 
 let id = 0;
 
@@ -8,9 +8,10 @@ interface DirectUploadParams {
   directUploadsUrl: string;
   file: File;
   headers?: object;
+  onStatusChange: (data: DirectUploadResult) => void;
 }
 
-const directUpload = ({ directUploadsUrl, file, headers }: DirectUploadParams, onStatusChange: (data: DirectUploadTaskResponse) => void) => {
+const directUpload = ({ directUploadsUrl, file, headers, onStatusChange }: DirectUploadParams) => {
   const taskId = ++id;
   let canceled = false;
   let task: StatefulPromise<FetchBlobResponse>;

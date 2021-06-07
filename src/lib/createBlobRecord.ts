@@ -19,7 +19,7 @@ const createBlobRecord = async ({ directUploadsUrl, file, headers = {} }: Create
   const checksum = await getChecksum({ path: file.path });
 
   if (!checksum) {
-    throw new Error(`Failed to get file checksum:  ${file.path}`)
+    throw new Error(`Failed to get file checksum. Path: ${file.path}`)
   }
 
   const params: BlobParams = {

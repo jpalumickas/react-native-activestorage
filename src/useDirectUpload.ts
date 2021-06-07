@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback } from 'react';
-import { File, DirectUploadTaskResponse } from './types';
+import { File, DirectUploadResult } from './types';
 import directUpload from './lib/directUpload';
 import insertOrReplace from './lib/insertOrReplace';
 import useConfig from './useConfig';
@@ -14,9 +14,9 @@ export type Params = {
 
 const useDirectUpload = ({ onSuccess }: Params = {}) => {
   const { directUploadsUrl } = useConfig();
-  const [uploads, setUploads] = useState<DirectUploadTaskResponse[]>([]);
+  const [uploads, setUploads] = useState<DirectUploadResult[]>([]);
 
-  const handleFileUploadChange = useCallback((fileUpload: DirectUploadTaskResponse) => {
+  const handleFileUploadChange = useCallback((fileUpload: DirectUploadResult) => {
     setUploads((fileUploads) => insertOrReplace(fileUploads, fileUpload));
   }, []);
 
@@ -24,7 +24,7 @@ const useDirectUpload = ({ onSuccess }: Params = {}) => {
     async (files: File[]) => {
       const signedIds = await Promise.all(
         files.map((file) =>
-          directUpload({ file, directUploadsUrl }, handleFileUploadChange)
+          directUpload({ file, directUploadsUrl, onStatusChange: handleFileUploadChange })
         )
       );
 

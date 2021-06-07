@@ -91,11 +91,13 @@ const file = {
 
 const directUploadsUrl = 'https://localhost:3000/rails/active_storage/direct_uploads';
 
-directUpload({ file, directUploadsUrl }, ({ status, progress, cancel }) => {
+const onStatusChange = ({ status, progress, cancel }) => {
   // status - waiting/uploading/success/error/canceled
   // progress - 0-100% (for uploading status)
   // cancel - function to stop uploading a file
-});
+}
+
+directUpload({ file, directUploadsUrl, onStatusChange });
 ```
 
 ## License

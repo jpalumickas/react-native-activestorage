@@ -8,55 +8,56 @@ export interface File {
   metadata?: FileMetadata;
 }
 
-export type DirectUploadTaskStatus =
+export type DirectUploadResultStatus =
   | 'success'
   | 'uploading'
   | 'error'
   | 'waiting'
   | 'canceled';
 
-export interface DirectUploadTask {
+export interface DirectUploadResultBase {
   id: number;
+  status: DirectUploadResultStatus;
   file: File;
   cancel: () => void;
 }
 
-export interface DirectUploadTaskError extends DirectUploadTask {
+export interface DirectUploadResultError extends DirectUploadResultBase {
   status: 'error';
   error: Error;
 }
 
-export interface DirectUploadTaskSuccess extends DirectUploadTask {
+export interface DirectUploadResultSuccess extends DirectUploadResultBase {
   status: 'success';
 }
 
-export interface DirectUploadTaskWaiting extends DirectUploadTask {
+export interface DirectUploadResultWaiting extends DirectUploadResultBase {
   status: 'waiting';
 }
 
-export interface DirectUploadTaskCanceled extends DirectUploadTask {
+export interface DirectUploadResultCanceled extends DirectUploadResultBase {
   status: 'canceled';
 }
 
-export interface DirectUploadTaskUploading extends DirectUploadTask {
+export interface DirectUploadResultUploading extends DirectUploadResultBase {
   status: 'uploading';
   progress: number;
   totalBytes: number;
   uploadedBytes: number;
 }
 
-export type DirectUploadTaskResponse =
-  | DirectUploadTaskError
-  | DirectUploadTaskSuccess
-  | DirectUploadTaskWaiting
-  | DirectUploadTaskCanceled
-  | DirectUploadTaskUploading;
+export type DirectUploadResult =
+  | DirectUploadResultError
+  | DirectUploadResultSuccess
+  | DirectUploadResultWaiting
+  | DirectUploadResultCanceled
+  | DirectUploadResultUploading;
 
-type WithoutDirectUploadParams<T> = Omit<T, 'id' | 'cancel' | 'file'>;
+type WithoutDirectUploadBaseParams<T> = Omit<T, 'id' | 'cancel' | 'file'>;
 
 export type HandleStatusUpdateData =
-  | WithoutDirectUploadParams<DirectUploadTaskError>
-  | WithoutDirectUploadParams<DirectUploadTaskUploading>
-  | WithoutDirectUploadParams<DirectUploadTaskWaiting>
-  | WithoutDirectUploadParams<DirectUploadTaskCanceled>
-  | WithoutDirectUploadParams<DirectUploadTaskSuccess>;
+  | WithoutDirectUploadBaseParams<DirectUploadResultError>
+  | WithoutDirectUploadBaseParams<DirectUploadResultUploading>
+  | WithoutDirectUploadBaseParams<DirectUploadResultWaiting>
+  | WithoutDirectUploadBaseParams<DirectUploadResultCanceled>
+  | WithoutDirectUploadBaseParams<DirectUploadResultSuccess>;
