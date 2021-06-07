@@ -1,6 +1,6 @@
 type Item = { [key: string]: any };
 
-const insertOrReplace = (list: Item[], obj: Item, key = 'id') => {
+const insertOrReplace = <T extends Item>(list: T[], obj: T, key = 'id') => {
   const newList = [...list];
   const index = newList.findIndex((it) => it[key] === obj[key]);
 

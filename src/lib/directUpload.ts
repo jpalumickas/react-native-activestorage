@@ -30,7 +30,7 @@ const directUpload = ({ directUploadsUrl, file, headers }: DirectUploadParams, o
 
   handleStatusUpdate({ status: 'waiting' });
 
-  return new Promise<void>(async (resolve) => {
+  return new Promise<string | void>(async (resolve) => {
     try {
       const blobData = await createBlobRecord({
         directUploadsUrl,
