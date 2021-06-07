@@ -8,8 +8,6 @@ const useDirectUpload = ({ onSuccess }) => {
   const [uploads, setUploads] = useState([]);
 
   const handleFileUploadChange = useCallback((fileUpload) => {
-    console.log({ fileUpload });
-
     setUploads((fileUploads) => insertOrReplace(fileUploads, fileUpload));
   }, []);
 
