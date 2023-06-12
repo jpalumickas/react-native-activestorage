@@ -20,9 +20,9 @@
     "abab": "^2.0.5"
   },
   "peerDependencies": {
-    "react": ">=16.8",
-    "react-native": ">= 0.60.0",
-    "rn-fetch-blob": ">= 0.10.0"
+    "react": ">= 17.0.2",
+    "react-native": ">= 0.65.0",
+    "react-native-blob-util": ">= 0.17.3"
   },
   "devDependencies": {
     "@types/react": "^17.0.9",
@@ -30,7 +30,7 @@
     "microbundle": "^0.13.1",
     "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
-    "rn-fetch-blob": "^0.12.0"
+    "react-native-blob-util": "^0.17.3"
   },
   "scripts": {
     "build": "rimraf dist && microbundle -f modern,esm,cjs --jsx React.createElement",
