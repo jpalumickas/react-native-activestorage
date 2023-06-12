@@ -69,7 +69,7 @@ const directUpload = ({ directUploadsUrl, file, headers, onStatusChange }: Direc
 
           resolve();
         });
-    } catch (err) {
+    } catch (err: any) {
       handleStatusUpdate({ status: 'error', error: err });
       return resolve();
     }
